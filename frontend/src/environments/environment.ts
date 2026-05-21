@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8000'
+  production: true,
+  apiUrl: 'https://ai-crypto-dashboard-w35c.onrender.com'
 };
