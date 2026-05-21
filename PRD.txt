@@ -1,0 +1,52 @@
+
+Product Requirements Document (PRD): AI Crypto Advisor Dashboard
+1. Project Overview
+Objective: Build a web app that serves as a personalized crypto investor dashboard. 
+The app will learn about the user through an onboarding quiz and deliver daily AI-curated content tailored to those interests.
+
+Key Interaction: Users must be able to give feedback (thumbs up/down) on the content to help improve future recommendations.
+
+
+2. Technical Stack & Architecture
+- Frontend: Angular.
+- Backend: Python FastAPI.
+- Database: PostgreSQL (or SQLite for local development).
+- Authentication: JWT-based basic authentication.
+- Architectural Directives for AI Generation:
+  Implement Dependency Injection for all external API clients (CoinGecko, CryptoPanic, OpenRouter) to ensure they are easily mockable for testing and resilient to rate limits.
+  - Use the Factory Pattern for the AI Insight generation service to easily switch between LLM providers (e.g., OpenRouter vs. Hugging Face) if primary endpoints fail.
+  - Maintain strict separation of concerns between backend routing, business logic, and data access layers.
+
+
+3. Core Features & User Flow
+Phase 1: Authentication
+  - Signup: Register using email, name, and password.
+  - Login: Secure endpoint issuing a JWT upon successful authentication.
+Phase 2: Onboarding Flow
+Triggered immediately after a user's first successful login.
+ust capture and save the following preferences to the database:
+  1. Target Assets: What crypto assets are you interested in?
+  2. Investor Persona: What type of investor are you? (e.g., HODLer, Day Trader, NFT Collector) .
+  3. Content Preference: What kind of content would you like to see? (e.g., Market News, Charts, Social, Fun) .
+Phase 3: The Daily Dashboard
+The core view displaying four distinct widgets populated based on the user's onboarded preferences.
+Every widget must include a thumbs up/down voting mechanism that stores feedback in the database.
+  1. Market News: Fetched via CryptoPanic API (must include a static JSON fallback mechanism).
+  2. Coin Prices: Real-time data fetched via CoinGecko API.
+  3. AI Insight of the Day: A personalized daily summary generated via a free LLM (OpenRouter or Hugging Face Inference API).
+  The prompt to the LLM must inject the user's specific persona and asset preferences.
+  4. Fun Crypto Meme: Fetched dynamically via Reddit scraping or a static JSON pool. Dynamically updates on each dashboard load.
+
+
+4. Deployment Strategy
+The project must be deployed and publicly accessible.
+  - Frontend Environment: Vercel or Netlify.
+  - Backend & DB Environment: Render, Railway, or Glitch.
+
+
+5. Bonus Implementation: The ML Feedback Loop
+(Note: Conceptual only; implementation not required in code )
+  - Data Collection: The system logs a daily payload containing the user's profile (Persona, Assets), the generated AI Insight, and the boolean feedback (Thumbs Up/Down).
+  - Model Training Process: This stored interaction data forms a dataset for Reinforcement Learning from Human Feedback (RLHF).
+  Positive interactions act as high-reward signals, while negative interactions act as penalties.
+  Periodically, this dataset is used to fine-tune a baseline model, aligning the AI's tone and analytical focus more tightly with specific investor archetypes (e.g., generating more technical analysis for Day Traders and macro-economic summaries for HODLers).

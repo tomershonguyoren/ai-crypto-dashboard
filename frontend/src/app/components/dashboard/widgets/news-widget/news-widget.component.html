@@ -1,0 +1,28 @@
+<div class="widget-card">
+  <div class="widget-header">
+    <h3>Market News</h3>
+  </div>
+  <div class="widget-content" style="display: block; text-align: left;">
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      @for (item of data; track item.id) {
+        <li style="margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 0.5rem;">
+          <a [href]="item.url" target="_blank" style="text-decoration: none; color: #3498db; font-weight: 500;">
+            {{ item.title }}
+          </a>
+        </li>
+      }
+    </ul>
+    @if (!data || data.length === 0) {
+      <p style="text-align: center; color: #7f8c8d;">No news available.</p>
+    }
+  </div>
+  <div class="widget-footer">
+    @if (hasVoted) {
+      <span>Thank you for voting!</span>
+    } @else {
+      <span>Was this helpful?</span>
+    }
+    <button (click)="vote(true)" [disabled]="hasVoted" title="Thumbs Up">👍</button>
+    <button (click)="vote(false)" [disabled]="hasVoted" title="Thumbs Down">👎</button>
+  </div>
+</div>

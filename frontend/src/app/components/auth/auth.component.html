@@ -1,0 +1,42 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="brand">
+      <h1>AI Crypto Advisor</h1>
+    </div>
+
+    <h2>{{ isLoginMode ? 'Welcome Back' : 'Create an Account' }}</h2>
+    
+    <div *ngIf="errorMessage" class="error-alert">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div class="form-group" *ngIf="!isLoginMode">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" placeholder="Satoshi Nakamoto" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" placeholder="you@example.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" placeholder="••••••••" />
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="authForm.invalid || isLoading">
+        {{ isLoading ? 'Processing...' : (isLoginMode ? 'Log In' : 'Sign Up') }}
+      </button>
+    </form>
+
+    <div class="toggle-footer">
+      <p>{{ isLoginMode ? "Don't have an account?" : 'Already have an account?' }} 
+        <button type="button" class="btn-link" (click)="toggleMode()">
+          {{ isLoginMode ? 'Sign Up' : 'Log In' }}
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

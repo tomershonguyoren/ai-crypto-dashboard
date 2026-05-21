@@ -1,0 +1,51 @@
+<div class="onboarding-wrapper">
+  <div class="onboarding-card">
+    <div class="header">
+      <h2>Welcome! Let's Personalize Your Dashboard</h2>
+      <p>Tell us a bit about your crypto journey so we can tailor the AI for you.</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-alert">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="target_assets">Target Assets</label>
+        <input 
+          id="target_assets" 
+          type="text" 
+          formControlName="target_assets" 
+          placeholder="e.g., BTC, ETH, SOL" 
+        />
+        <small>Comma-separated list of coins you track</small>
+      </div>
+
+      <div class="form-group">
+        <label for="investor_persona">Investor Persona</label>
+        <select id="investor_persona" formControlName="investor_persona">
+          <option value="" disabled selected>Select your profile type</option>
+          <option value="HODLer">HODLer (Long-term investor)</option>
+          <option value="Day Trader">Day Trader (Active daily)</option>
+          <option value="NFT Collector">NFT Collector / Web3</option>
+          <option value="DeFi Degenerate">DeFi Degenerate (Yield farmer)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="content_preference">Content Preference</label>
+        <select id="content_preference" formControlName="content_preference">
+          <option value="" disabled selected>Select what you'd like to see</option>
+          <option value="Market News">Market News & Fundamentals</option>
+          <option value="Charts">Technical Analysis & Charts</option>
+          <option value="Social">Social Sentiment & Trends</option>
+          <option value="Fun">Fun & Memes</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="onboardingForm.invalid || isLoading">
+        {{ isLoading ? 'Saving...' : 'Go To Dashboard' }}
+      </button>
+    </form>
+  </div>
+</div>

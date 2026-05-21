@@ -1,0 +1,31 @@
+<div class="dashboard-container">
+  <h1>AI Crypto Dashboard</h1>
+
+  @if (isLoading) {
+    <div class="loading-state" style="text-align: center; color: #7f8c8d; margin-top: 3rem;">
+      <h2>Loading your personalized data...</h2>
+    </div>
+  } @else if (dashboardData) {
+    <div class="widgets-grid">
+      <app-prices-widget 
+        [data]="dashboardData.prices" 
+        (onVote)="handleFeedback($event)">
+      </app-prices-widget>
+      
+      <app-insight-widget 
+        [data]="dashboardData.insight" 
+        (onVote)="handleFeedback($event)">
+      </app-insight-widget>
+      
+      <app-news-widget 
+        [data]="dashboardData.news" 
+        (onVote)="handleFeedback($event)">
+      </app-news-widget>
+      
+      <app-meme-widget 
+        [data]="dashboardData.meme" 
+        (onVote)="handleFeedback($event)">
+      </app-meme-widget>
+    </div>
+  }
+</div>
