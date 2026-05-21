@@ -3,9 +3,9 @@
     <h3>Crypto Meme</h3>
   </div>
   <div class="widget-content" style="padding: 0;">
-    @if (data) {
+    @if (currentMemeUrl) {
       <img 
-        [src]="data" 
+        [src]="currentMemeUrl" 
         alt="Crypto meme" 
         style="max-width: 100%; max-height: 250px; border-radius: 8px; object-fit: contain; margin: 1rem 0;" 
       />
@@ -19,7 +19,7 @@
     } @else {
       <span>Was this helpful?</span>
     }
-    <button (click)="vote(true)" [disabled]="hasVoted" title="Thumbs Up">👍</button>
-    <button (click)="vote(false)" [disabled]="hasVoted" title="Thumbs Down">👎</button>
+    <button (click)="vote(true)" [disabled]="hasVoted" title="Thumbs Up">??</button>
+    <button (click)="vote(false)" [disabled]="hasVoted" title="Thumbs Down">??</button>
   </div>
 </div>
