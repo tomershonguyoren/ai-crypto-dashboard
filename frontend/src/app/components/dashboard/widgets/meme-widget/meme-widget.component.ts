@@ -16,11 +16,11 @@ export class MemeWidgetComponent implements OnInit {
   currentMemeUrl: string = '';
 
   private readonly memeUrls: string[] = [
-    'https://i.imgflip.com/5c7lwq.jpg',
-    'https://i.imgflip.com/1ur9b0.jpg',
-    'https://i.imgflip.com/4tztcw.jpg',
-    'https://i.imgflip.com/2s3x2p.jpg',
-    'https://i.imgflip.com/4i9q9o.jpg'
+    'https://i.imgflip.com/1g8my4.jpg', // Two Buttons
+    'https://i.imgflip.com/3pbbv2.jpg', // Stonks
+    'https://i.imgflip.com/1jwhww.jpg', // Distracted Boyfriend
+    'https://i.imgflip.com/1iruch.jpg', // This is Fine Dog
+    'https://i.imgflip.com/1ur9b0.jpg'  // Drake Hotline Bling
   ];
 
   ngOnInit(): void {
